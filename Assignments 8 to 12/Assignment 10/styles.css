@@ -1,0 +1,61 @@
+.button {
+    border: none;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+}
+
+#resetButton {
+    background-color: lightyellow;
+}
+
+#resetButton:hover{
+    background-color: yellow;
+}
+
+#normalSubmit {
+    background-color: lightgreen;
+}
+
+#normalSubmit:hover{
+    background-color: green;
+}
+
+#urgentSubmit {
+    background-color: red;
+}
+
+#urgentSubmit:hover{
+    background-color: darkred;
+}
+
+.InputForm {
+    background-color: lightblue;
+    outline: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 300px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+input:valid {
+    border: 4px green solid ; 
+}
+
+input:invalid {
+    border: 4px red solid ; 
+}

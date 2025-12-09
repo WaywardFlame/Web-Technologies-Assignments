@@ -1,0 +1,81 @@
+Array
+(
+    [customerNumber] => 406
+    [customerName] => Auto Canal+ Petit
+    [contactLastName] => Perrier
+    [contactFirstName] => Dominique
+    [phone] => (1) 47.55.6555
+    [addressLine1] => 25, rue Lauriston
+    [addressLine2] => 
+    [city] => Paris
+    [state] => 
+    [postalCode] => 75016
+    [country] => France
+    [salesRepEmployeeNumber] => 1337
+    [creditLimit] => 95000.00
+)
+
+Array
+(
+    [0] => Array
+        (
+            [0] => 10211
+            [1] => 2004-01-15
+            [2] => 2004-01-25
+            [3] => 2004-01-18
+            [4] => Shipped
+            [5] => 
+            [6] => 406
+        )
+
+    [1] => Array
+        (
+            [0] => 10252
+            [1] => 2004-05-26
+            [2] => 2004-06-04
+            [3] => 2004-05-29
+            [4] => Shipped
+            [5] => 
+            [6] => 406
+        )
+
+    [2] => Array
+        (
+            [0] => 10402
+            [1] => 2005-04-07
+            [2] => 2005-04-14
+            [3] => 2005-04-12
+            [4] => Shipped
+            [5] => 
+            [6] => 406
+        )
+
+)
+
+Array
+(
+    [0] => Array
+        (
+            [0] => 406
+            [1] => BJMPR4545
+            [2] => 2005-04-23
+            [3] => 12190.85
+        )
+
+    [1] => Array
+        (
+            [0] => 406
+            [1] => HJ217687
+            [2] => 2004-01-28
+            [3] => 49165.16
+        )
+
+    [2] => Array
+        (
+            [0] => 406
+            [1] => NA197101
+            [2] => 2004-06-17
+            [3] => 25080.96
+        )
+
+)

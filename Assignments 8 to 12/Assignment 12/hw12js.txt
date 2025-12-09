@@ -1,0 +1,60 @@
+window.addEventListener("load", function() {
+	const form = document.getElementById("addingEmployee");
+	let formData = null;
+
+	function isValid_firstname(){
+        	const firstName = formData.get('firstName');
+        	console.log("checking first name:", firstName);
+        	let isAcceptable = /^[A-Za-z\-\']+$/.test(firstName) && (firstName.length >= 2);
+        	if(!isAcceptable){
+            		console.log("first name not acceptable");
+            		return false;
+        	}
+        	return true;
+    	}
+
+	function isValid_lastname(){
+		const lastName = formData.get('lastName');
+		console.log("checking last name:", lastName);
+		let isAcceptable = /^[A-Za-z\-\']+$/.test(lastName) && (lastName.length >= 2);
+		if(!isAcceptable){
+			console.log("last name not acceptable");
+			return false;
+		}
+		return true;
+	}
+
+	//function isValid_email() {
+        	//const email = formData.get('EmailBox') ; 
+        	//console.log('checking email:', email) ; 
+        	//if (!email.endsWith(".com")) {
+            	//	console.log('email not acceptable') ; 
+            	//	return false ; 
+        	//}
+        	//return true ; 
+	//}
+
+	function isValid_jobtitle() {
+		const jobTitle = formData.get('jobTitle');
+		console.log("checking job title:", jobTitle);
+		let isAcceptable = /^[A-Za-z0-9\-]+$/.test(jobTitle) && (jobTitle.length >= 4);
+		if(!isAcceptable){
+			console.log("job title not acceptable");
+			return false;
+		}
+		return true;
+	}
+
+	function isFormValid() {
+		formData = new FormData(form);
+		return isValid_firstname() && isValid_lastname() && isValid_jobtitle(); // && isValid_email();
+	}
+
+	form.addEventListener("submit", function(event) {
+		console.log("user is trying to submit");
+		if(!isFormValid()){
+			event.preventDefault();
+			console.log("form has invalid data");
+		}
+	});
+});

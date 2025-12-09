@@ -1,0 +1,50 @@
+## IMPORTANT... Disable word wrapping in your editor
+
+
+# 4.1 Updating your ubuntu server
+sudo apt update
+
+# 4.2 Upgrading your ubuntu server
+sudo apt upgrade
+
+# 5.1 Creating a self-signed certificate
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+
+# 5.3 Creating a dhparam file
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+# 6.1 Install nginx package
+sudo apt install nginx
+
+# 6.2 Configure the self-signed certificate
+echo 'c3NsX2NlcnRpZmljYXRlIC9ldGMvc3NsL2NlcnRzL25naW54LXNlbGZzaWduZWQuY3J0Owpzc2xfY2VydGlmaWNhdGVfa2V5IC9ldGMvc3NsL3ByaXZhdGUvbmdpbngtc2VsZnNpZ25lZC5rZXk7Cg==' | base64 -d - | sudo tee /etc/nginx/snippets/self-signed.conf > /dev/null
+
+# 6.3 Configure the SSL parameters
+echo 'c3NsX3Byb3RvY29scyBUTFN2MS4yOwpzc2xfcHJlZmVyX3NlcnZlcl9jaXBoZXJzIG9uOwpzc2xfY2lwaGVycyAiRUVDREgrQUVTR0NNOkVESCtBRVNHQ006QUVTMjU2K0VFQ0RIOkFFUzI1NitFREgiOwpzc2xfZWNkaF9jdXJ2ZSBzZWNwMzg0cjE7CnNzbF9zZXNzaW9uX2NhY2hlIHNoYXJlZDpTU0w6MTBtOwpzc2xfc2Vzc2lvbl90aWNrZXRzIG9mZjsKc3NsX3N0YXBsaW5nIG9uOwpzc2xfc3RhcGxpbmdfdmVyaWZ5IG9uOwpyZXNvbHZlciA4LjguOC44IDguOC40LjQgdmFsaWQ9MzAwczsKcmVzb2x2ZXJfdGltZW91dCA1czsKYWRkX2hlYWRlciBTdHJpY3QtVHJhbnNwb3J0LVNlY3VyaXR5ICJtYXgtYWdlPTYzMDcyMDAwOyBpbmNsdWRlU3ViZG9tYWlucyI7CmFkZF9oZWFkZXIgWC1GcmFtZS1PcHRpb25zIERFTlk7CmFkZF9oZWFkZXIgWC1Db250ZW50LVR5cGUtT3B0aW9ucyBub3NuaWZmOwpzc2xfZGhwYXJhbSAvZXRjL3NzbC9jZXJ0cy9kaHBhcmFtLnBlbTsK' | base64 -d - | sudo tee /etc/nginx/snippets/ssl-params.conf > /dev/null
+
+# 6.4. Make a backup of the main configuration file
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/distrib
+
+# 6.5 Now we can do our changes to the main configuration file
+echo 'c2VydmVyIHsKCSMgU1NMIGNvbmZpZ3VyYXRpb24KCWxpc3RlbiA0NDMgc3NsIGh0dHAyIGRlZmF1bHRfc2VydmVyOwoJbGlzdGVuIFs6Ol06NDQzIHNzbCBodHRwMiBkZWZhdWx0X3NlcnZlcjsKCWluY2x1ZGUgc25pcHBldHMvc2VsZi1zaWduZWQuY29uZjsKCWluY2x1ZGUgc25pcHBldHMvc3NsLXBhcmFtcy5jb25mOwoKCXJvb3QgL3Zhci93d3cvaHRtbDsKCgkjIEFkZCBpbmRleC5waHAgdG8gdGhlIGxpc3QgaWYgeW91IGFyZSB1c2luZyBQSFAKCWluZGV4IGluZGV4Lmh0bWwgaW5kZXgucGhwOwoKCXNlcnZlcl9uYW1lIF87CgoJbG9jYXRpb24gLyB7CgkJIyBGaXJzdCBhdHRlbXB0IHRvIHNlcnZlIHJlcXVlc3QgYXMgZmlsZSwgdGhlbgoJCSMgYXMgZGlyZWN0b3J5LCB0aGVuIGZhbGwgYmFjayB0byBkaXNwbGF5aW5nIGEgNDA0LgoJCXRyeV9maWxlcyAkdXJpICR1cmkvID00MDQ7Cgl9CgojCWxvY2F0aW9uIH4gXC5waHAkIHsKIwkgIHJvb3QgL3Zhci93d3cvaHRtbDsKIwkgIHRyeV9maWxlcyAkdXJpID00MDQ7CiMJICBmYXN0Y2dpX3NwbGl0X3BhdGhfaW5mbyBeKC4rXC5waHApKC8uKykkOwojCSAgZmFzdGNnaV9wYXNzIHVuaXg6L3Zhci9ydW4vcGhwL3BocC1mcG0uc29jazsKIwkgIGZhc3RjZ2lfaW5kZXggaW5kZXgucGhwOwojCSAgZmFzdGNnaV9wYXJhbSBTQ1JJUFRfRklMRU5BTUUgJGRvY3VtZW50X3Jvb3QkZmFzdGNnaV9zY3JpcHRfbmFtZTsKIwkgIGluY2x1ZGUgZmFzdGNnaV9wYXJhbXM7CiMJICBmYXN0Y2dpX3JlYWRfdGltZW91dCAzMDA7CiMJfQoKfQoKc2VydmVyIHsKCWxpc3RlbiA4MCBkZWZhdWx0X3NlcnZlcjsKCWxpc3RlbiBbOjpdOjgwIGRlZmF1bHRfc2VydmVyOwoJIyBjaGFuZ2UgdGhlIG5leHQgbGluZSB0byB5b3VyIHNlcnZlcidzIGZxZG4KCXNlcnZlcl9uYW1lIGVjMi5jb21wdXRlLmFtYXpvbmF3cy5jb20gOwoJcmV0dXJuIDMwMiBodHRwczovLyRzZXJ2ZXJfbmFtZSRyZXF1ZXN0X3VyaTsKfQo=' | base64 -d - | sudo tee /etc/nginx/sites-available/default > /dev/null
+
+# 6.6.1 Let’s make sure we got all three config files correct
+echo ce06df2c2a53f169cc48ad3e8f84d89e5c295c1c00886d31dee3606fdb58b92d /etc/nginx/sites-available/default | sha256sum -c
+
+# 6.6.2
+echo 2ebe327e944269f402267f0a1e06eff60723d3847329c7d233aa20012bb574f3 /etc/nginx/snippets/self-signed.conf | sha256sum -c
+
+# 6.6.3
+echo cad3cb9841d0d8471f98470ae11b5e9501f5ebd563bfd582d6843f5b6d0fd354 /etc/nginx/snippets/ssl-params.conf | sha256sum -c
+
+# 6.7 Edit the config file and put your server's FQDN (change the editor to whatever you're familar with)
+sudo vi /etc/nginx/sites-available/default
+
+# 6.8 test the syntax of the config file.
+sudo nginx -t
+
+# 6.9 ask nginx to realod so the new config takes affect.
+sudo service nginx reload
+
+# 6.10 get an index.html fast
+sudo cp /var/www/html/index.nginx-debian.html /var/www/html/index.html
